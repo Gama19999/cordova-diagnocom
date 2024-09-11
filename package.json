@@ -1,0 +1,29 @@
+{
+  "name": "com.serial30.diagnocom",
+  "displayName": "DiagnoCom",
+  "version": "1.0.0",
+  "description": "Sistema experto diagnosticador de enfermedades comunes en adultos",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "cordova run android"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "GAMARS",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "cordova-android": "^13.0.0"
+  },
+  "cordova": {
+    "platforms": [
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-fingerprint-aio": {}
+    }
+  },
+  "dependencies": {
+    "cordova-plugin-fingerprint-aio": "6.0.0"
+  }
+}
