@@ -19,19 +19,20 @@
 
 /* App object */
 let app = {
-    checkForAuth: function() {
-        let authMethods = (methods) => document.getElementById('auth').value = methods;
+    fetchBiometrics: function() {
+        let authMethods = (methods) => document.getElementById('bio-auth').value = methods;
         let authError = (error) => alert('Error: ' + error);
         let optionalParams = {allowBackup: true, requireStrongBiometrics: true};
         Fingerprint.isAvailable(authMethods, authError, optionalParams);
     },
-    authenticate: function() {
+    bioAuth: function() {
         let onAuthSuccess = function(authResponse) {
-            document.getElementById('auth').value = authResponse;
-            document.getElementById('auth').dispatchEvent(new CustomEvent('input'));
+            document.getElementById('bio-auth').value = authResponse;
+            document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
         }
         let onAuthFailure = function(error) {
-            document.getElementById('auth').value = error.message;
+            document.getElementById('bio-auth').value = error.message;
+            document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
         }
         let options = {
             title: 'DiagnoCom',
@@ -45,7 +46,7 @@ let app = {
 
 /* Cordova has been loaded. Perform any initialization that requires Cordova here. */
 document.addEventListener('deviceready', function() {
-    app.checkForAuth();
+    app.fetchBiometrics();
 }, false);
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
