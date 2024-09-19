@@ -20,10 +20,10 @@
 /* App object */
 let app = {
     fetchBiometrics: function() {
-        let authMethods = (methods) => document.getElementById('bio-auth').value = methods;
-        let authError = (error) => alert('Error: ' + error);
-        let optionalParams = {allowBackup: true, requireStrongBiometrics: true};
-        Fingerprint.isAvailable(authMethods, authError, optionalParams);
+        let availableAuthMethods = (methods) => document.getElementById('bio-auth').value = methods;
+        let authMethodsError = (error) => document.getElementById('bio-auth').value = error;
+        let optionalParams = {requireStrongBiometrics: true};
+        Fingerprint.isAvailable(availableAuthMethods, authMethodsError, optionalParams);
     },
     bioAuth: function() {
         let onAuthSuccess = function(authResponse) {
@@ -37,7 +37,7 @@ let app = {
         let options = {
             title: 'DiagnoCom',
             subtitle: 'Autoriza para continuar',
-            disableBackup: false,
+            disableBackup: true,
             confirmationRequired: true
         };
         Fingerprint.show(options, onAuthSuccess, onAuthFailure);
