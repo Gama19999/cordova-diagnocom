@@ -20,27 +20,30 @@
 /* App object */
 let app = {
     fetchBiometrics: function() {
-        let availableAuthMethods = (methods) => document.getElementById('bio-auth').value = methods;
-        let authMethodsError = (error) => document.getElementById('bio-auth').value = error;
-        let optionalParams = {requireStrongBiometrics: true};
+        const availableAuthMethods = (methods) => document.getElementById('bio-auth').value = methods;
+        const authMethodsError = (error) => document.getElementById('bio-auth').value = error;
+        const optionalParams = {requireStrongBiometrics: true};
         Fingerprint.isAvailable(availableAuthMethods, authMethodsError, optionalParams);
     },
     bioAuth: function() {
-        let onAuthSuccess = function(authResponse) {
+        const onAuthSuccess = function(authResponse) {
             document.getElementById('bio-auth').value = authResponse;
             document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
         }
-        let onAuthFailure = function(error) {
+        const onAuthFailure = function(error) {
             document.getElementById('bio-auth').value = error.message;
             document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
         }
-        let options = {
+        const options = {
             title: 'DiagnoCom',
             subtitle: 'Autoriza para continuar',
             disableBackup: true,
             confirmationRequired: true
         };
         Fingerprint.show(options, onAuthSuccess, onAuthFailure);
+    },
+    saveResultPic(fileName) {
+        console.log('Feature not implemented!', '\nFile name: ', fileName);
     }
 }
 
