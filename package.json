@@ -1,7 +1,7 @@
 {
   "name": "ovh.serial30.diagnocom",
   "displayName": "DiagnoCom",
-  "version": "2.0.1",
+  "version": "2.2.0",
   "description": "Sistema experto diagnosticador de enfermedades comunes en adultos",
   "main": "index.js",
   "scripts": {

@@ -41,9 +41,6 @@ let app = {
             confirmationRequired: true
         };
         Fingerprint.show(options, onAuthSuccess, onAuthFailure);
-    },
-    saveResultPic(fileName) {
-        console.log('Feature not implemented!', '\nFile name: ', fileName);
     }
 }
 

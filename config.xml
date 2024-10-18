@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="ovh.serial30.diagnocom" version="2.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="ovh.serial30.diagnocom" version="2.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>DiagnoCom</name>
     <description>Sistema experto diagnosticador de enfermedades comunes en adultos</description>
     <author email="gama.rios0110@gmail.com" href="https://github.com/Gama19999">GAMARS</author>
 
     <content src="index.html" />
-    <icon src="www/assets/images/icon_nobg.png" />
+    <icon src="www/media/diagnocom.webp" />
 
     <access origin="https://diagnocom-api.serial30.ovh/*" />
 
