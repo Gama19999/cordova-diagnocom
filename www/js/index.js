@@ -29,11 +29,11 @@ let app = {
         const onAuthSuccess = function(authResponse) {
             document.getElementById('bio-auth').value = authResponse;
             document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
-        }
+        };
         const onAuthFailure = function(error) {
             document.getElementById('bio-auth').value = error.message;
             document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
-        }
+        };
         const options = {
             title: 'DiagnoCom',
             subtitle: 'Autoriza para continuar',
@@ -41,8 +41,42 @@ let app = {
             confirmationRequired: true
         };
         Fingerprint.show(options, onAuthSuccess, onAuthFailure);
+    },
+    savePicture: function (filename, data, mimeType) {
+        const androidFolder = 'file:///storage/emulated/0/Android/media/';
+        const iosFolder = cordova.file.documentsDirectory;
+        const location = device.platform === 'Android' ? androidFolder : iosFolder;
+        window.resolveLocalFileSystemURL(location,
+            systemDirectory => {
+                console.log('DiagnoCom system directory: ', location);
+                systemDirectory.getDirectory('ovh.serial30.diagnocom', {create: true}, directoryEntry => {
+                    console.log('Created app media directory:\n', directoryEntry);
+                    directoryEntry.getDirectory('DiagnoCom', {create: true}, directoryEntry => {
+                        console.log('Created DiagnoCom directory:\n', directoryEntry);
+                        directoryEntry.getFile(filename, {create: true}, fileEntry => {
+                            fileEntry.createWriter(fileWriter => {
+                                fileWriter.write(new Blob([byteData(data)], {type: mimeType}));
+                                fileWriter.onwriteend = (progress) => {
+                                    console.log('Successfully saved image!\n', progress);
+                                    document.getElementById('saveAsPicture').value = 'Resultado guardado';
+                                    document.getElementById('saveAsPicture').dispatchEvent(new CustomEvent('input'));
+                                }
+                                fileWriter.onerror = console.error;
+                            }, console.error);
+                        }, console.error);
+                    }, console.error);
+                }, console.error);
+            }, console.error
+        );
     }
 }
+
+const byteData = (data) => {
+    const byteCharacters = atob(data.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) byteNumbers[i] = byteCharacters.charCodeAt(i);
+    return new Uint8Array(byteNumbers);
+};
 
 /* Cordova has been loaded. Perform any initialization that requires Cordova here. */
 document.addEventListener('deviceready', function() {
