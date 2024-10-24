@@ -26,5 +26,5 @@ node_modules/
 /plugins/
 /platforms/
 
-# Config File Backup
-config.bak.xml
+# Web Hooks
+al_web_hooks/*

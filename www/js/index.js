@@ -68,6 +68,22 @@ let app = {
                 }, console.error);
             }, console.error
         );
+    },
+    bindAppLinksEvents: function () {
+        window.plugins.AppLinks.subscribe('resultLoad', function (eventData) {
+            console.log('<<<ANDROID APP>>> AppLink retrieved data:\n', eventData);
+            console.log('<<<ANDROID APP>>> Redirect to result with ID: ', eventData.path.split('/')[2]);
+            document.getElementsByName('result-load').item(0).value = eventData.path;
+            document.getElementsByName('result-load').item(0).dispatchEvent(new CustomEvent('input'));
+        });
+        window.plugins.AppLinks.subscribe('fileDownload', function (eventData) {
+            console.log('<<<ANDROID APP>>> AppLink retrieved data:\n', eventData);
+            console.log('<<<ANDROID APP>>> Try to download file from: ', eventData.url);
+        });
+        window.plugins.AppLinks.subscribe('appLinkLaunch', function (eventData) {
+            console.log('<<<ANDROID APP>>> AppLink retrieved data:\n', eventData);
+            console.log('<<<ANDROID APP>>> Launched app from url: ', eventData.url);
+        });
     }
 }
 
@@ -81,6 +97,7 @@ const byteData = (data) => {
 /* Cordova has been loaded. Perform any initialization that requires Cordova here. */
 document.addEventListener('deviceready', function() {
     app.fetchBiometrics();
+    app.bindAppLinksEvents();
 }, false);
 
 // Wait for the deviceready event before using any of Cordova's device APIs.

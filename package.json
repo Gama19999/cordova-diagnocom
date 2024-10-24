@@ -1,7 +1,7 @@
 {
   "name": "ovh.serial30.diagnocom",
   "displayName": "DiagnoCom",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "description": "Sistema experto diagnosticador de enfermedades comunes en adultos",
   "main": "index.js",
   "scripts": {
@@ -14,6 +14,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "cordova-android": "^13.0.0",
+    "cordova-plugin-applinks": "github:Gama19999/cordova-plugin-applinks",
     "cordova-plugin-device": "^3.0.0",
     "cordova-plugin-file": "^8.1.0"
   },
@@ -26,7 +27,8 @@
       "cordova-plugin-device": {},
       "cordova-plugin-file": {
         "ANDROIDX_WEBKIT_VERSION": "1.4.0"
-      }
+      },
+      "cordova-plugin-applinks": {}
     }
   },
   "dependencies": {
