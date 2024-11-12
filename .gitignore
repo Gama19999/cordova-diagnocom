@@ -28,3 +28,6 @@ node_modules/
 
 # Web Hooks
 al_web_hooks/*
+
+# Local Folder
+keytool/*

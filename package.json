@@ -1,11 +1,12 @@
 {
   "name": "ovh.serial30.diagnocom",
   "displayName": "DiagnoCom",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "description": "Sistema experto diagnosticador de enfermedades comunes en adultos",
   "main": "index.js",
   "scripts": {
-    "deploy": "cordova run android"
+    "deploy": "cordova run android",
+    "signed": "cordova run android"
   },
   "keywords": [
     "ecosystem:cordova"
