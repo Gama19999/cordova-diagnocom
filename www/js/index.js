@@ -17,22 +17,33 @@
  * under the License.
  */
 
-/* App object */
-let app = {
+const byteData = (data) => {
+    const byteCharacters = atob(data.split(',')[1]);
+    const byteNumbers = new Array(byteCharacters.length);
+    for (let i = 0; i < byteCharacters.length; i++) byteNumbers[i] = byteCharacters.charCodeAt(i);
+    return new Uint8Array(byteNumbers);
+};
+
+const ngMobileBioResElem = 'mobile-auth-res';
+
+/**
+ * Cordova App object
+ */
+const app = {
     fetchBiometrics: function() {
-        const availableAuthMethods = (methods) => document.getElementById('bio-auth').value = methods;
-        const authMethodsError = (error) => document.getElementById('bio-auth').value = error;
+        const availableAuthMethods = (methods) => document.getElementById(ngMobileBioResElem).value = methods;
+        const authMethodsError = (error) => document.getElementById(ngMobileBioResElem).value = error;
         const optionalParams = {requireStrongBiometrics: true};
         Fingerprint.isAvailable(availableAuthMethods, authMethodsError, optionalParams);
     },
-    bioAuth: function() {
+    triggerBiometricsAuth: function() {
         const onAuthSuccess = function(authResponse) {
-            document.getElementById('bio-auth').value = authResponse;
-            document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
+            document.getElementById(ngMobileBioResElem).value = authResponse;
+            document.getElementById(ngMobileBioResElem).dispatchEvent(new CustomEvent('input'));
         };
         const onAuthFailure = function(error) {
-            document.getElementById('bio-auth').value = error.message;
-            document.getElementById('bio-auth').dispatchEvent(new CustomEvent('input'));
+            document.getElementById(ngMobileBioResElem).value = error.message;
+            document.getElementById(ngMobileBioResElem).dispatchEvent(new CustomEvent('input'));
         };
         const options = {
             title: 'DiagnoCom',
@@ -85,13 +96,6 @@ let app = {
             console.log('<<<ANDROID APP>>> Launched app from url: ', eventData.url);
         });
     }
-}
-
-const byteData = (data) => {
-    const byteCharacters = atob(data.split(',')[1]);
-    const byteNumbers = new Array(byteCharacters.length);
-    for (let i = 0; i < byteCharacters.length; i++) byteNumbers[i] = byteCharacters.charCodeAt(i);
-    return new Uint8Array(byteNumbers);
 };
 
 /* Cordova has been loaded. Perform any initialization that requires Cordova here. */
